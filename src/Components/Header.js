@@ -1,5 +1,8 @@
 import React from 'react';
-import { Media } from 'reactstrap';
+import {
+  Media,
+  Button, Form, FormGroup, Input,
+} from 'reactstrap';
 import './Header.css';
 
 const Header = () => {
@@ -16,6 +19,12 @@ const Header = () => {
           <div className="appSubHeading">Stolen bykes</div>
         </Media>
       </Media>
+      <Form inline className="filterForm">
+          <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
+            <Input value="" placeholder="Search incident descriptions" />
+          </FormGroup>
+          <Button>Find incidents</Button>
+        </Form>
     </div>
   );
 };

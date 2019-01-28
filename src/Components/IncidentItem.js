@@ -2,7 +2,7 @@ import React from 'react';
 import { Container, Row, Col } from 'reactstrap';
 import './Incident.css'
 
-const Incident = props => {
+const IncidentItem = props => {
   const {
     media, title, description,
     address,
@@ -29,4 +29,4 @@ const Incident = props => {
   );
 }
 
-export default Incident;
+export default IncidentItem;
