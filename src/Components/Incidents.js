@@ -5,9 +5,11 @@ import {
   Button, Form, FormGroup, Input
 } from 'reactstrap';
 import APP_CONFIG from '../constants';
-import 'rc-pagination/assets/index.css';
-import IncidentItem from './IncidentItem';
 import localeInfo from 'rc-pagination/lib/locale/en_US';
+import IncidentItem from './IncidentItem';
+import 'rc-pagination/assets/index.css';
+import './Incidents.css';
+
 
 class Incidents extends React.Component {
   constructor(props) {
