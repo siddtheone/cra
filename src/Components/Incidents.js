@@ -1,6 +1,9 @@
 import React from 'react';
 import axios from 'axios';
 import Pagination from 'rc-pagination';
+import {
+  Button, Form, FormGroup, Input
+} from 'reactstrap';
 import APP_CONFIG from '../constants';
 import 'rc-pagination/assets/index.css';
 import IncidentItem from './IncidentItem';
@@ -16,10 +19,17 @@ class Incidents extends React.Component {
       page: 1,
       query: '',
     };
-
+    this.handler = {};
     this.getIncidents = this.getIncidents.bind(this);
     this.onPageChange = page => {
       this.setState({page});
+    }
+    this.handleChange = field => {
+      if(this.handler[field]) {
+        return this.handler[field];
+      }
+      this.handler[field] = e => this.setState({[field]: e.target.value});
+      return this.handler[field];
     }
   }
 
@@ -27,7 +37,10 @@ class Incidents extends React.Component {
     this.getIncidents();
   }
 
-  getIncidents() {
+  getIncidents(e) {
+    if (e) {
+      e.preventDefault();
+    }
     const {
       page, query
     } = this.state;
@@ -69,7 +82,7 @@ class Incidents extends React.Component {
     const {
       isError, isLoading,
       incidents,
-      page,
+      page, query,
     } = this.state;
 
     const start = (page-1)*APP_CONFIG.RECORDS_PER_PAGE;
@@ -94,6 +107,12 @@ class Incidents extends React.Component {
 
     return (
       <div>
+        <Form inline className="filterForm" onSubmit={this.getIncidents}>
+          <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
+            <Input value={query} placeholder="Search incident descriptions" onChange={this.handleChange('query')} />
+          </FormGroup>
+          <Button type="submit" onClick={this.getIncidents}>Find incidents</Button>
+        </Form>
         {isError && !isLoading ? <div className="text-danger">Something went wrong.</div>: null}
         {!isError && isLoading ? <div>Loading...</div> : null}
         {!isError && !isLoading ? <Section /> : null}

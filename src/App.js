@@ -5,13 +5,6 @@ import Header from './Components/Header';
 import Incidents from './Components/Incidents';
 
 class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      query: '',
-    };
-  }
-
   render() {
     return (
       <Router>
